@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-
-import '../auth_form/email_input.dart';
-import '../auth_form/login_button.dart';
-import '../auth_form/mode_switch_button.dart';
-import '../auth_form/password_input.dart';
-import '../auth_form/username_input.dart';
+import 'package:flutter_parse_chat/modules/auth/presentation/auth_form/email_input.dart';
+import 'package:flutter_parse_chat/modules/auth/presentation/auth_form/login_button.dart';
+import 'package:flutter_parse_chat/modules/auth/presentation/auth_form/mode_switch_button.dart';
+import 'package:flutter_parse_chat/modules/auth/presentation/auth_form/password_input.dart';
+import 'package:flutter_parse_chat/modules/auth/presentation/auth_form/username_input.dart';
 
 class AuthForm extends StatefulWidget {
   final Size deviceSize;
-  final void Function() onLogin;
+  final void Function(String email, String password) onLogin;
 
   AuthForm(this.deviceSize, {@required this.onLogin});
 
@@ -25,14 +24,14 @@ class _AuthFormState extends State<AuthForm> {
   bool _isLogin = true;
   bool _isLoading = false;
 
-  void Function() get onLogin => widget.onLogin;
+  void Function(String email, String password) get onLogin => widget.onLogin;
 
   void _submit() {
     final bool isValid = _formKey.currentState.validate();
     FocusScope.of(context).unfocus();
 
     if (isValid) {
-      onLogin();
+      onLogin('email', 'password');
     }
   }
 

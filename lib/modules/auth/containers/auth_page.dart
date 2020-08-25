@@ -35,13 +35,13 @@ class AuthPage extends StatelessWidget {
 }
 
 class _ViewModel {
-  final Function() onLogin;
+  final Function(String email, String password) onLogin;
 
   _ViewModel({this.onLogin});
 
   static _ViewModel fromStore(Store<AppState> store) {
-    return _ViewModel(onLogin: () {
-      store.dispatch(LoginAction());
+    return _ViewModel(onLogin: (String email, String password) {
+      store.dispatch(LoginAction(email, password));
     });
   }
 

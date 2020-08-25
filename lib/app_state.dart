@@ -2,23 +2,23 @@ import 'dart:convert';
 
 import 'package:meta/meta.dart';
 
-import 'modules/auth/models/auth.dart';
+import 'modules/auth/models/auth_state.dart';
 
 @immutable
 class AppState {
   final bool isLoading;
-  final Auth auth;
+  final AuthState auth;
 
   AppState({
     this.isLoading = false,
-    this.auth = const Auth(),
+    this.auth = const AuthState(),
   });
 
   factory AppState.loading() => AppState(isLoading: true);
 
   AppState copyWith({
     bool isLoading,
-    Auth auth,
+    AuthState auth,
   }) {
     return AppState(
       isLoading: isLoading ?? this.isLoading,
@@ -51,7 +51,7 @@ class AppState {
 
     return AppState(
       isLoading: map['isLoading'],
-      auth: Auth.fromMap(map['auth']),
+      auth: AuthState.fromMap(map['auth']),
     );
   }
 

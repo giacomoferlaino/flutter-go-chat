@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_parse_chat/app_state_middleware.dart';
 import 'package:flutter_parse_chat/app_state_reducer.dart';
 import 'package:redux/redux.dart';
 
@@ -15,6 +16,7 @@ Future<void> main() async {
   final Store<AppState> store = Store<AppState>(
     appStateReducer,
     initialState: AppState(),
+    middleware: createAppMiddleware(),
   );
   runApp(App(store));
 }

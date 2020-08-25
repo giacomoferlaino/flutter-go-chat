@@ -1,3 +1,4 @@
-import 'models/auth.dart';
+import 'models/auth_state.dart';
 
-bool isAuthenticatedSelector(Auth state) => state.isAuthenticated;
+bool isAuthenticatedSelector(AuthState state) =>
+    state.authToken != null && state.authToken.isNotEmpty;

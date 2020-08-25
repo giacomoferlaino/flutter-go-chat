@@ -1,12 +1,18 @@
 import 'package:flutter_parse_chat/modules/auth/auth_actions.dart';
 import 'package:redux/redux.dart';
 
-import './models/auth.dart';
+import 'models/auth_state.dart';
 
-final Auth Function(Auth, dynamic) authReducer = combineReducers<Auth>([
-  TypedReducer<Auth, LoginAction>(_login),
+final AuthState Function(AuthState, dynamic) authReducer =
+    combineReducers<AuthState>([
+  TypedReducer<AuthState, LoginAction>(_login),
+  TypedReducer<AuthState, SaveAuthTokenAction>(_saveAuthToken),
 ]);
 
-Auth _login(Auth state, LoginAction action) {
-  return state.copyWith(isAuthenticated: true);
+AuthState _login(AuthState state, LoginAction action) {
+  return state;
+}
+
+AuthState _saveAuthToken(AuthState state, SaveAuthTokenAction action) {
+  return state.copyWith(authToken: action.authToken);
 }

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_parse_chat/app_state.dart';
+import 'package:flutter_parse_chat/modules/auth/auth_actions.dart';
+import 'package:flutter_parse_chat/modules/auth/presentation/auth_background.dart';
+import 'package:flutter_parse_chat/modules/auth/presentation/auth_form/auth_form.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-
-import '../../../app_state.dart';
-import '../presentation/auth_background.dart';
-import '../auth_actions.dart';
-import '../presentation/auth_form/auth_form.dart';
 
 class AuthPage extends StatelessWidget {
   @override

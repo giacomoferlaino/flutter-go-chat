@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_parse_chat/app_state.dart';
+import 'package:flutter_parse_chat/color_palette.dart' as ColorPalette;
 import 'package:flutter_parse_chat/modules/auth/auth_selectors.dart';
+import 'package:flutter_parse_chat/modules/auth/containers/auth_page.dart';
+import 'package:flutter_parse_chat/modules/chat/containers/chats_list_page.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-
-import './app_state.dart';
-import './color_palette.dart' as ColorPalette;
-import 'modules/auth/containers/auth_page.dart';
-import './modules/chat/containers/chats_list_page.dart';
 
 class App extends StatelessWidget {
   final Store<AppState> store;

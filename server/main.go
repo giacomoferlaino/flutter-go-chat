@@ -7,15 +7,15 @@ import (
 	"net/http"
 )
 
+type authData struct {
+	Token string `json:"token"`
+}
+
 func main() {
 	router := http.NewServeMux()
 
 	router.HandleFunc("/auth/login", func(res http.ResponseWriter, req *http.Request) {
-		response := struct {
-			Token string
-		}{
-			Token: "authToken",
-		}
+		response := authData{Token: "authToken"}
 		apiResponse, err := json.Marshal(response)
 		if err != nil {
 			fmt.Fprintln(res, "An error occured")

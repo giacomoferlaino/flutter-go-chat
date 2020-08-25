@@ -1,21 +1,24 @@
-import 'dart:convert';
-
 import 'package:flutter_parse_chat/app_state.dart';
 import 'package:flutter_parse_chat/modules/auth/auth_actions.dart';
+import 'package:flutter_parse_chat/modules/auth/models/login_data.dart';
 import 'package:flutter_parse_chat/modules/auth/models/session_data.dart';
-import 'package:http/http.dart';
+import 'package:flutter_parse_chat/modules/auth/repositories/auth_repository.dart';
 import 'package:redux/redux.dart';
 
-List<Middleware<AppState>> createAuthMiddleware() {
+List<Middleware<AppState>> createAuthMiddleware(AuthRepository authRepository) {
   return [
-    TypedMiddleware<AppState, LoginAction>(_login()),
+    TypedMiddleware<AppState, LoginAction>(_login(authRepository)),
   ];
 }
 
-Middleware<AppState> _login() {
+Middleware<AppState> _login(AuthRepository authRepository) {
   return (Store<AppState> store, action, NextDispatcher next) async {
-    final Response response = await get('http://10.0.2.2:8080/auth/login');
-    final SessionData sessionData = SessionData.fromJson(response.body);
+    final SessionData sessionData = await authRepository.login(
+      LoginData(
+        email: 'email',
+        password: 'password',
+      ),
+    );
     store.dispatch(SaveAuthTokenAction(sessionData.token));
     next(action);
   };

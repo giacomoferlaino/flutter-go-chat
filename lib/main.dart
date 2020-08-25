@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_parse_chat/app_state_middleware.dart';
 import 'package:flutter_parse_chat/app_state_reducer.dart';
+import 'package:flutter_parse_chat/environment.dart';
+import 'package:flutter_parse_chat/modules/auth/repositories/auth_repository.dart';
+import 'package:flutter_parse_chat/modules/auth/repositories/auth_web_api_repository.dart';
 import 'package:redux/redux.dart';
 
 import './app.dart';
 import './app_state.dart';
 
 Future<void> main() async {
+  const AuthRepository authRepository = const AuthWebApiRepository(baseUrl);
+
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -16,7 +21,7 @@ Future<void> main() async {
   final Store<AppState> store = Store<AppState>(
     appStateReducer,
     initialState: AppState(),
-    middleware: createAppMiddleware(),
+    middleware: createAppMiddleware(authRepository),
   );
   runApp(App(store));
 }

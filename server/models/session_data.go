@@ -1,4 +1,4 @@
-package auth
+package models
 
 // SessionData contains the information needed to send authenticated requests
 type SessionData struct {

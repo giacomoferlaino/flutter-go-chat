@@ -1,10 +1,5 @@
 package models
 
-import (
-	"github.com/google/uuid"
-	"github.com/jinzhu/gorm"
-)
-
 // User data model
 type User struct {
 	Model
@@ -13,8 +8,8 @@ type User struct {
 	Password string `json:"password"`
 }
 
-// BeforeCreate generates a new UUID before saving
-func (user *User) BeforeCreate(scope *gorm.Scope) error {
-	scope.SetColumn("ID", uuid.New())
-	return nil
+// PasswordMatch return the string comparison between the saved password
+// and the one passed as an argument
+func (user *User) PasswordMatch(password string) bool {
+	return user.Password == password
 }

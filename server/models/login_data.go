@@ -1,4 +1,4 @@
-package auth
+package models
 
 // LoginData is the login request data model
 type LoginData struct {

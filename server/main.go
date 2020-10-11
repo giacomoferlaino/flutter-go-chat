@@ -27,17 +27,17 @@ func main() {
 	graphqlAPI.InitSchema()
 	router := http.NewServeMux()
 
-	// router.HandleFunc("/graphql", func(res http.ResponseWriter, req *http.Request) {
-	// 	query := req.URL.Query().Get("query")
-	// 	result := graphqlAPI.ExecuteQuery(query)
-	// 	json.NewEncoder(res).Encode(result)
-	// })
-	router.Handle("/graphql", handler.New(&handler.Config{
+	graphqlHandler := handler.New(&handler.Config{
 		Schema:     &graphqlAPI.Schema,
 		Pretty:     true,
 		GraphiQL:   true,
 		Playground: true,
-	}))
+	})
+
+	router.HandleFunc("/graphql", func(res http.ResponseWriter, req *http.Request) {
+		ctx := apis.Authenticate(req)
+		graphqlHandler.ContextHandler(ctx, res, req)
+	})
 
 	log.Fatal(http.ListenAndServe(":8080", router))
 }

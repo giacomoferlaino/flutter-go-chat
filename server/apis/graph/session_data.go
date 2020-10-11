@@ -1,9 +1,9 @@
-package models
+package graph
 
 import "github.com/graphql-go/graphql"
 
-// SessionDataType is the SessionData model for GraphQL
-var SessionDataType = graphql.NewObject(
+// sessionDataType is the SessionData model for GraphQL
+var sessionDataType = graphql.NewObject(
 	graphql.ObjectConfig{
 		Name: "SessionData",
 		Fields: graphql.Fields{

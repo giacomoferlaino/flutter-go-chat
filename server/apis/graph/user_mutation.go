@@ -16,7 +16,7 @@ func newUserMutation(db *gorm.DB) *graphql.Field {
 		Type: graphql.NewObject(
 			graphql.ObjectConfig{
 				Name:        "userMutation",
-				Description: "User CRUD",
+				Description: "User CRUD mutations",
 				Fields: graphql.Fields{
 					"create": newCreateField(db),
 					"delete": newDeleteField(db),

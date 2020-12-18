@@ -9,11 +9,14 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-func newAuthField(db *gorm.DB, jwtManager *auth.JwtManager) *graphql.Field {
+func newAuthQuery(db *gorm.DB, jwtManager *auth.JwtManager) *graphql.Field {
 	return &graphql.Field{
+		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+			return true, nil
+		},
 		Type: graphql.NewObject(graphql.ObjectConfig{
 			Name:        "AuthQuery",
-			Description: "Authenticatio queries",
+			Description: "Authentication queries",
 			Fields: graphql.Fields{
 				"login": newLoginField(db, jwtManager),
 			},

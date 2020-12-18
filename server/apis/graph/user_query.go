@@ -15,19 +15,23 @@ func newUserQuery(db *gorm.DB) *graphql.Field {
 		Type: graphql.NewObject(
 			graphql.ObjectConfig{
 				Name:        "userQuery",
-				Description: "User CRUD",
+				Description: "User CRUD queries",
 				Fields: graphql.Fields{
-					"find": &graphql.Field{
-						Type:        graphql.NewList(userType),
-						Description: "Retrieve all users",
-						Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-							users := &[]models.User{}
-							db.Find(users)
-							return users, nil
-						},
-					},
+					"find": newFindField(db),
 				},
 			},
 		),
+	}
+}
+
+func newFindField(db *gorm.DB) *graphql.Field {
+	return &graphql.Field{
+		Type:        graphql.NewList(userType),
+		Description: "Retrieve all users",
+		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+			users := &[]models.User{}
+			db.Find(users)
+			return users, nil
+		},
 	}
 }

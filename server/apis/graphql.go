@@ -29,8 +29,8 @@ type GraphQL struct {
 func (gql *GraphQL) InitSchema() {
 
 	graphqlSchemaConfig := graphql.SchemaConfig{
-		// Mutation: ,
-		Query: graph.NewQueryType(gql.DB, gql.jwtManager),
+		Mutation: graph.NewMutationType(gql.DB),
+		Query:    graph.NewQueryType(gql.DB, gql.jwtManager),
 	}
 
 	schema, err := graphql.NewSchema(graphqlSchemaConfig)

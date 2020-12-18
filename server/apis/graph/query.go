@@ -14,7 +14,7 @@ func NewQueryType(db *gorm.DB, jwtManager *auth.JwtManager) *graphql.Object {
 			Name: "Query",
 			Fields: graphql.Fields{
 				"auth": newAuthField(db, jwtManager),
-				"user": newUserField(db),
+				"user": newUserQuery(db),
 			},
 		},
 	)

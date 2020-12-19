@@ -15,8 +15,8 @@ Middleware<AppState> _login(AuthRepository authRepository) {
   return (Store<AppState> store, action, NextDispatcher next) async {
     final SessionData sessionData = await authRepository.login(
       LoginData(
-        email: 'email',
-        password: 'password',
+        email: 'test@user.com',
+        password: 'test',
       ),
     );
     store.dispatch(SaveAuthTokenAction(sessionData.token));

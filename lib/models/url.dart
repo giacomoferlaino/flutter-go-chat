@@ -48,7 +48,7 @@ class Url {
   factory Url.fromJson(String source) => Url.fromMap(json.decode(source));
 
   @override
-  String toString() => 'Url(scheme: $scheme, host: $host, port: $port)';
+  String toString() => '$scheme://$host:$port/';
 
   @override
   bool operator ==(Object o) {
